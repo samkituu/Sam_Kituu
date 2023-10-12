@@ -19,36 +19,38 @@
     }
 
     header {
-      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom: 20px;
     }
 
-    h1 {
-      font-size: 36px;
-      margin: 0;
-    }
-
-    p {
-      margin: 0;
-      font-size: 18px;
-      color: #555;
-    }
-
-    .about, .contact {
-      background-color: #fff;
-      padding: 20px;
+    .business-card {
+      display: flex;
+      align-items: center;
+      background-color: #021E42;
       border-radius: 10px;
-      margin-bottom: 20px;
+      padding: 20px;
     }
 
-    .profile-photo {
-      display: block;
-      margin: 0 auto 20px;
-      width: 150px;
-      height: 150px;
+    .business-card img {
       border-radius: 50%;
-      background-image: url('Assets/profpic.JPG'); /* Replace with your profile photo URL */
-      background-size: cover;
+      margin-right: 20px;
+    }
+
+    .business-card .text {
+      color: white;
+      text-align: left;
+    }
+
+    .business-card .text h1 {
+      font-size: 42px;
+      color: #FFFFFF;
+    }
+
+    .business-card .text p {
+      font-size: 24px;
+      color: #FFFFFF;
     }
 
     .save-contact-button {
@@ -61,70 +63,96 @@
       border-radius: 10px;
       font-size: 18px;
       cursor: pointer;
+      margin-top: 20px;
+      margin-bottom: 20px; /* Added margin to separate from the Powered by Nijue text */
     }
 
     .save-contact-button:hover {
       background-color: #0056b3;
     }
 
+    .social-media-icons {
+      display: flex;
+      margin-top: 20px;
+    }
+
     .social-media-icon {
-      width: 20px;
-      height: 20px;
-      margin-right: 5px;
+      width: 40px;
+      height: 40px;
+      margin: 0 10px;
+    }
+
+    .social-networks h2 {
+      color: #021E42;
+    }
+
+    .nijue-link {
+      color: blue; /* Changed the color to blue */
+      text-decoration: none;
+    }
+
+    .nijue-link:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <div class="profile-photo"></div>
-      <h1>Sam Kituu</h1>
-      <p>Web Developer</p>
+      <div class="business-card">
+        <img src="Assets/profpic.JPG" alt="Profile Picture" width="150" height="150">
+        <div class="text">
+          <h1>Sam Kituu</h1>
+          <p style="font-size: 18px;">Founder at Nijue</p>
+        </div>
+      </div>
     </header>
     
     <section class="about">
       <h2>About Me</h2>
-      <p>Sam Kituu is the founder of Nijue Smart Business Card, a virtual business card that uses NFC, QR codes, and other technologies to revolutionize the way we share contact information.</p>
+      <p>Sam Kituu is the founder of Nijue Smart Business Card, a virtual business card that uses NFC, QR codes, and other technologies to revolutionize the way we share contact information. <a href="nijue.html" class="nijue-link">Get to know more about Nijue.</a></p>
     </section>
 
     <section class="contact">
       <h2>Contact Information</h2>
       <ul>
-        <li><strong>Email:</strong> kituusam@gmail.com</li>
-        <li><strong>Mobile:</strong> +254708958409</li>
-        <li><strong>Social Media:</strong>
-          <a href="https://www.instagram.com/nijuecard/"><img src="Assets/ig.png" alt="Instagram" class="social-media-icon"></a>
-          <a href="https://www.facebook.com/kituu.sam/"><img src="Assets/fb.png" alt="Facebook" class="social-media-icon"></a>
-          <a href="https://www.linkedin.com/in/sam-kituu/"><img src="Assets/LI.png" alt="LinkedIn" class="social-media-icon"></a>
-          <a href="https://twitter.com/254Mistari"><img src="Assets/X.png" alt="Twitter" class="social-media-icon"></a>
-          <a href="https://www.youtube.com/@yeastindough"><img src="Assets/YT.png" alt="YouTube" class="social-media-icon"></a>
-          <a href="mailto:kituusam@gmail.com"><img src="Assets/GM.png" alt="Gmail" class="social-media-icon"></a>
-        </li>
+        <li><strong>Email:</strong> <a href="mailto:kituusam@gmail.com" style="color: blue;">kituusam@gmail.com</a></li>
+        <li><strong>Mobile:</strong> <a href="tel:+254708958409" style="color: blue;">+254708958409</a></li>
       </ul>
     </section>
 
-    <button class="save-contact-button" onclick="promptSaveContact()">Save Contact</button>
+    <section class="social-networks">
+      <h2>Social Networks</h2>
+      <div class="social-media-icons">
+        <a href="https://www.instagram.com/nijuecard/" target="_blank"><img src="Assets/ig.png" alt="Instagram" class="social-media-icon"></a>
+        <a href="https://www.facebook.com/kituu.sam/" target="_blank"><img src="Assets/fb.png" alt="Facebook" class="social-media-icon"></a>
+        <a href="https://www.linkedin.com/in/sam-kituu/" target="_blank"><img src="Assets/LI.png" alt="LinkedIn" class="social-media-icon"></a>
+        <a href="https://twitter.com/254Mistari" target="_blank"><img src="Assets/X.png" alt="Twitter" class="social-media-icon"></a>
+        <a href="https://www.youtube.com/@yeastindough" target="_blank"><img src="Assets/YT.png" alt="YouTube" class="social-media-icon"></a>
+      </div>
+    </section>
+
+    <button class="save-contact-button" onclick="promptDownloadVCF()">Save Contact</button>
   </div>
 
   <script>
-    function promptSaveContact() {
-      const phoneNumber = '+254708958409';
-      const email = 'kituusam@gmail.com';
-      const contactInfo = `BEGIN:VCARD\nVERSION:3.0\nFN:Sam Kituu\nTEL:${phoneNumber}\nEMAIL:${email}\nEND:VCARD`;
-
+    function promptDownloadVCF() {
+      const contactInfo = `BEGIN:VCARD\nVERSION:3.0\nFN:Sam Kituu\nTEL:+254708958409\nEMAIL:kituusam@gmail.com\nEND:VCARD`;
       const blob = new Blob([contactInfo], { type: 'text/vcard' });
       const url = window.URL.createObjectURL(blob);
 
       const a = document.createElement('a');
-      a.style.display = 'none';
       a.href = url;
-      a.download = 'Sam_Kituu_Contact.vcf'; // Change the filename as needed
-      document.body.appendChild(a);
-
+      a.download = 'SamKituuContact.vcf';
       a.click();
 
+      // Cleanup
       window.URL.revokeObjectURL(url);
     }
   </script>
+
+  <footer style="text-align: center;">
+    <p>Powered by <a href="https://nijue.co.ke" class="nijue-link" target="_blank">Nijue</a></p>
+  </footer>
 </body>
 </html>
