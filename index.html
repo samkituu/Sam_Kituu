@@ -44,8 +44,8 @@
     .profile-photo {
       display: block;
       margin: 0 auto 20px;
-      width: 234px; /* Updated width to 234 pixels */
-      height: 311px; /* Updated height to 311 pixels */
+      width: 150px;
+      height: 150px;
       border-radius: 50%;
       background-image: url('Assets/profpic.JPG'); /* Replace with your profile photo URL */
       background-size: cover;
@@ -110,13 +110,20 @@
     function promptSaveContact() {
       const phoneNumber = '+254708958409';
       const email = 'kituusam@gmail.com';
-      const contactInfo = `Name: Sam Kituu\nMobile: ${phoneNumber}\nEmail: ${email}`;
-  
-      // Display a message to the user
-      alert(`To save the contact, please open your phone's contacts app and add a new contact with the following information:\n\n${contactInfo}`);
-      
-      // Open the phone's dialer with the phone number pre-filled
-      window.location.href = `tel:${phoneNumber}`;
+      const contactInfo = `BEGIN:VCARD\nVERSION:3.0\nFN:Sam Kituu\nTEL:${phoneNumber}\nEMAIL:${email}\nEND:VCARD`;
+
+      const blob = new Blob([contactInfo], { type: 'text/vcard' });
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      a.download = 'Sam_Kituu_Contact.vcf'; // Change the filename as needed
+      document.body.appendChild(a);
+
+      a.click();
+
+      window.URL.revokeObjectURL(url);
     }
   </script>
 </body>
